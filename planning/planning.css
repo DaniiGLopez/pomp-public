@@ -1,0 +1,561 @@
+<style>
+/* ==========================================================
+POMP BASIC 2.1 — planning.yourpomp
+CSS DROP-IN
+Brand: Peace of Mind Planning
+Palette: Forest Green, Olive, Blue, Browns, Burnt Orange
+Fonts: Batman Nerd (headings) / Batman Soft (body)
+========================================================== */
+
+/* ----------------------------------------------------------
+BATMAN FONTS
+---------------------------------------------------------- */
+
+@font-face {
+font-family: 'Batman Nerd';
+src: url('https://cdn.jsdelivr.net/gh/DaniiGLopez/POMPPeaceofMindPlanning/Batman%20nerd.woff') format('woff');
+font-weight: 400;
+font-style: normal;
+font-display: swap;
+}
+
+@font-face {
+font-family: 'Batman Soft';
+src: url('https://cdn.jsdelivr.net/gh/DaniiGLopez/POMPPeaceofMindPlanning/Batman%20soft.woff') format('woff');
+font-weight: 300;
+font-style: normal;
+font-display: swap;
+}
+
+/* ----------------------------------------------------------
+BRAND TOKENS
+---------------------------------------------------------- */
+
+:root {
+--pomp-forest: #4C5C53;
+--pomp-olive: #7C7D38;
+--pomp-blue: #517383;
+--pomp-tan: #C49A6C;
+--pomp-brown: #8B5E3C;
+--pomp-orange: #BE6039;
+--pomp-dark: #2B1200;
+
+--pomp-bg: #F6F2ED;
+--pomp-surface: #FFFFFF;
+--pomp-border: #DDD5C8;
+--pomp-muted: #7a7264;
+
+--font-heading: 'Batman Nerd', 'Segoe UI', Helvetica, Arial, sans-serif;
+--font-body: 'Batman Soft', 'Segoe UI', Helvetica, Arial, sans-serif;
+
+--radius-sm: 6px;
+--radius-md: 10px;
+--radius-lg: 16px;
+--shadow-card: 0 2px 12px rgba(43, 18, 0, 0.07);
+--transition: 0.2s ease;
+}
+
+/* ----------------------------------------------------------
+GLOBAL BASE
+---------------------------------------------------------- */
+
+body,
+input,
+button,
+select,
+textarea,
+label,
+.check-label-text {
+font-family: var(--font-body);
+color: var(--pomp-dark);
+box-sizing: border-box;
+}
+
+h1, h2, h3, h4,
+.pomp-heading,
+.submit-basic,
+.submit-final {
+font-family: var(--font-heading);
+}
+
+/* ----------------------------------------------------------
+INTRO SECTION
+---------------------------------------------------------- */
+
+.pomp-intro {
+margin-bottom: 32px;
+padding: 28px 24px 24px;
+background: var(--pomp-surface);
+border-radius: var(--radius-lg);
+border-left: 5px solid var(--pomp-tan);
+box-shadow: var(--shadow-card);
+}
+
+.pomp-intro__eyebrow {
+font-family: var(--font-body);
+font-size: 0.78rem;
+font-weight: 600;
+letter-spacing: 0.12em;
+text-transform: uppercase;
+color: var(--pomp-orange);
+margin-bottom: 10px;
+}
+
+.pomp-intro__heading {
+font-family: var(--font-heading);
+font-size: 1.55rem;
+color: var(--pomp-dark);
+margin: 0 0 14px;
+line-height: 1.25;
+}
+
+.pomp-intro__body {
+font-size: 0.97rem;
+color: var(--pomp-forest);
+line-height: 1.65;
+margin: 0 0 10px;
+}
+
+.pomp-intro__body--last {
+margin-bottom: 0;
+}
+
+/* ----------------------------------------------------------
+FORM BLOCKS
+---------------------------------------------------------- */
+
+.form-block {
+margin-bottom: 28px;
+padding: 24px;
+background: var(--pomp-surface);
+border-radius: var(--radius-md);
+border: 1px solid var(--pomp-border);
+box-shadow: var(--shadow-card);
+animation: blockFadeIn 0.3s ease both;
+}
+
+@keyframes blockFadeIn {
+from { opacity: 0; transform: translateY(6px); }
+to { opacity: 1; transform: translateY(0); }
+}
+
+.form-block__label,
+label {
+display: block;
+font-family: var(--font-heading);
+font-size: 1rem;
+font-weight: 600;
+color: var(--pomp-forest);
+margin-bottom: 14px;
+line-height: 1.4;
+}
+
+.form-block__hint {
+margin: 10px 0 0;
+font-size: 0.875rem;
+color: var(--pomp-muted);
+font-style: italic;
+}
+
+/* ----------------------------------------------------------
+TEXT INPUTS
+---------------------------------------------------------- */
+
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+input[type="date"],
+textarea,
+select {
+display: block;
+width: 100%;
+padding: 13px 16px;
+margin-bottom: 12px;
+border: 1.5px solid var(--pomp-border);
+border-radius: var(--radius-sm);
+background: #faf8f5;
+font-family: var(--font-body);
+font-size: 1rem;
+color: var(--pomp-dark);
+transition: border-color var(--transition), background var(--transition), box-shadow var(--transition);
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="tel"]:focus,
+input[type="date"]:focus,
+textarea:focus,
+select:focus {
+outline: none;
+border-color: var(--pomp-orange);
+background: var(--pomp-surface);
+box-shadow: 0 0 0 3px rgba(190, 96, 57, 0.1);
+}
+
+input[type="text"]::placeholder,
+input[type="email"]::placeholder,
+input[type="tel"]::placeholder,
+textarea::placeholder {
+color: #b5a99a;
+}
+
+textarea {
+min-height: 90px;
+resize: vertical;
+}
+
+/* ----------------------------------------------------------
+INLINE "OTHER" TEXT FIELD
+---------------------------------------------------------- */
+
+.inline-text {
+margin-top: 10px;
+display: none;
+}
+
+/* ----------------------------------------------------------
+CONDITIONAL BLOCKS (hidden by default)
+---------------------------------------------------------- */
+
+.conditional {
+display: none;
+}
+
+/* ----------------------------------------------------------
+CHECKLIST OPTIONS
+---------------------------------------------------------- */
+
+.checklist-group {
+display: flex;
+flex-direction: column;
+gap: 10px;
+}
+
+.checklist-option {
+position: relative;
+display: flex;
+align-items: flex-start;
+gap: 12px;
+padding: 14px 16px 14px 52px;
+background: #faf8f5;
+border: 1.5px solid var(--pomp-border);
+border-radius: var(--radius-md);
+cursor: pointer;
+transition: border-color var(--transition), background var(--transition), box-shadow var(--transition);
+min-height: 48px;
+}
+
+/* Hide native checkbox */
+.checklist-option input[type="checkbox"] {
+position: absolute;
+opacity: 0;
+pointer-events: none;
+}
+
+/* Custom checkbox square */
+.checklist-option::before {
+content: "";
+position: absolute;
+left: 16px;
+top: 50%;
+transform: translateY(-50%);
+width: 24px;
+height: 24px;
+border: 2px solid var(--pomp-forest);
+border-radius: 5px;
+background: var(--pomp-surface);
+transition: border-color var(--transition), background var(--transition);
+}
+
+/* Checkmark */
+.checklist-option input[type="checkbox"]:checked ~ .check-label-text::after {
+content: "✔";
+position: absolute;
+left: 19px;
+top: 50%;
+transform: translateY(-55%);
+font-size: 14px;
+font-weight: 700;
+color: var(--pomp-forest);
+pointer-events: none;
+}
+
+/* Label text */
+.check-label-text {
+font-family: var(--font-body);
+font-size: 0.97rem;
+color: var(--pomp-dark);
+line-height: 1.5;
+display: block;
+}
+
+/* Selected state — card */
+.checklist-option:has(input[type="checkbox"]:checked) {
+background: #EEF4F1;
+border-color: var(--pomp-forest);
+box-shadow: 0 2px 8px rgba(76, 92, 83, 0.12);
+}
+
+.checklist-option:has(input[type="checkbox"]:checked) .check-label-text {
+font-weight: 600;
+color: var(--pomp-dark);
+}
+
+/* Keep box white when selected */
+.checklist-option:has(input[type="checkbox"]:checked)::before {
+background: var(--pomp-surface);
+border-color: var(--pomp-forest);
+}
+
+/* Hover */
+.checklist-option:hover {
+border-color: var(--pomp-orange);
+background: #fdf5ef;
+}
+
+/* ----------------------------------------------------------
+SECTION HEADINGS (h4)
+---------------------------------------------------------- */
+
+h4 {
+margin: 0 0 14px;
+font-family: var(--font-heading);
+font-size: 1.1rem;
+color: var(--pomp-forest);
+font-weight: 700;
+border-left: 5px solid var(--pomp-orange);
+padding-left: 12px;
+}
+
+/* ----------------------------------------------------------
+SUBMIT — BASIC
+---------------------------------------------------------- */
+
+.submit-basic {
+display: block;
+width: 100%;
+padding: 16px 20px;
+margin-top: 8px;
+background-color: var(--pomp-blue);
+color: #fff;
+border: none;
+border-radius: var(--radius-md);
+font-family: var(--font-heading);
+font-size: 1.1rem;
+font-weight: 600;
+text-align: center;
+cursor: pointer;
+letter-spacing: 0.03em;
+transition: background var(--transition), transform var(--transition), box-shadow var(--transition);
+box-shadow: 0 4px 14px rgba(81, 115, 131, 0.25);
+}
+
+.submit-basic:hover {
+background-color: var(--pomp-dark);
+transform: translateY(-2px);
+box-shadow: 0 6px 18px rgba(43, 18, 0, 0.22);
+}
+
+.submit-basic:active {
+transform: translateY(0);
+background-color: var(--pomp-forest);
+box-shadow: none;
+}
+
+/* ----------------------------------------------------------
+SUBMIT — FINAL
+---------------------------------------------------------- */
+
+.submit-final {
+display: block;
+width: 100%;
+padding: 18px 20px;
+margin-top: 28px;
+background-color: var(--pomp-forest);
+color: #fff;
+border: none;
+border-radius: var(--radius-md);
+font-family: var(--font-heading);
+font-size: 1.15rem;
+font-weight: 700;
+text-align: center;
+cursor: pointer;
+letter-spacing: 0.03em;
+transition: background var(--transition), transform var(--transition), box-shadow var(--transition);
+box-shadow: 0 4px 14px rgba(76, 92, 83, 0.25);
+}
+
+.submit-final:hover {
+background-color: var(--pomp-dark);
+transform: translateY(-2px);
+box-shadow: 0 6px 18px rgba(43, 18, 0, 0.22);
+}
+
+.submit-final:active {
+transform: translateY(0);
+background-color: var(--pomp-brown);
+box-shadow: none;
+}
+
+/* ----------------------------------------------------------
+ASSIST / SAVE LATER BUTTON (FLOATING)
+---------------------------------------------------------- */
+
+.assist-button {
+position: fixed;
+bottom: 22px;
+right: 22px;
+background: var(--pomp-orange);
+color: #fff;
+padding: 14px 20px;
+border-radius: 50px;
+border: none;
+font-family: var(--font-heading);
+font-size: 0.95rem;
+font-weight: 700;
+cursor: pointer;
+z-index: 9999;
+box-shadow: 0 4px 16px rgba(190, 96, 57, 0.35);
+transition: background var(--transition), transform var(--transition);
+letter-spacing: 0.02em;
+}
+
+.assist-button:hover {
+background: var(--pomp-brown);
+transform: scale(1.05);
+}
+
+.assist-button:active {
+transform: scale(0.97);
+}
+
+/* ----------------------------------------------------------
+CONFIRMATION SECTION
+---------------------------------------------------------- */
+
+.pomp-confirm {
+display: none;
+margin-top: 24px;
+padding: 32px 28px;
+background: var(--pomp-surface);
+border-radius: var(--radius-lg);
+border-top: 4px solid var(--pomp-tan);
+box-shadow: var(--shadow-card);
+text-align: center;
+animation: blockFadeIn 0.4s ease both;
+}
+
+.pomp-confirm__icon {
+font-size: 2.2rem;
+color: var(--pomp-tan);
+margin-bottom: 16px;
+display: block;
+}
+
+.pomp-confirm__heading {
+font-family: var(--font-heading);
+font-size: 1.45rem;
+color: var(--pomp-dark);
+margin: 0 0 16px;
+}
+
+.pomp-confirm__body {
+font-size: 0.97rem;
+color: var(--pomp-forest);
+line-height: 1.65;
+margin: 0 0 12px;
+}
+
+.pomp-confirm__contact {
+margin-top: 20px;
+padding: 20px 22px;
+border: 1.5px solid var(--pomp-border);
+border-radius: var(--radius-md);
+background: #faf8f5;
+text-align: left;
+}
+
+.pomp-confirm__contact-label {
+font-family: var(--font-heading);
+font-size: 0.9rem;
+font-weight: 700;
+color: var(--pomp-dark);
+margin: 0 0 6px;
+}
+
+.pomp-confirm__phone {
+display: inline-block;
+font-family: var(--font-heading);
+font-size: 1.25rem;
+font-weight: 700;
+color: var(--pomp-orange);
+text-decoration: none;
+margin-bottom: 8px;
+transition: color var(--transition);
+}
+
+.pomp-confirm__phone:hover {
+color: var(--pomp-dark);
+}
+
+.pomp-confirm__contact-note {
+font-size: 0.9rem;
+color: var(--pomp-muted);
+margin: 0;
+}
+
+/* ----------------------------------------------------------
+SONG LIST (for extended form use)
+---------------------------------------------------------- */
+
+#songs-wrapper {
+display: flex;
+flex-direction: column;
+gap: 10px;
+}
+
+.song-row {
+margin-bottom: 10px;
+}
+
+.song-row input {
+flex: 1;
+}
+
+.song-row.ghost input {
+opacity: 0.45;
+}
+
+.song-row input:hover {
+border-color: var(--pomp-blue);
+}
+
+/* ----------------------------------------------------------
+MOBILE
+---------------------------------------------------------- */
+
+@media (max-width: 600px) {
+.pomp-intro {
+padding: 20px 18px;
+}
+
+.form-block {
+padding: 18px 16px;
+}
+
+.checklist-option {
+padding: 12px 14px 12px 48px;
+}
+
+.assist-button {
+bottom: 16px;
+right: 16px;
+padding: 12px 16px;
+font-size: 0.88rem;
+}
+
+.song-row {
+flex-direction: column;
+}
+}
+</style>
