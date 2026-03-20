@@ -1,0 +1,200 @@
+<!-- =========================
+POMP — planning.yourpomp
+HTML DROP-IN v2.1
+========================= -->
+
+<!-- INTRO -->
+<section class="pomp-intro">
+<div class="pomp-intro__eyebrow">Peace of Mind Planning</div>
+<h2 class="pomp-intro__heading">Planning Ahead, Made Simple</h2>
+<p class="pomp-intro__body">
+This checklist helps you share your basic wishes so your family isn't left guessing later.
+</p>
+<p class="pomp-intro__body">
+It takes just a few minutes, and you can stop at any time. You don't need to know every detail —
+just answer what you can today.
+</p>
+<p class="pomp-intro__body pomp-intro__body--last">
+If you'd like help or want to add more details later, an advisor can walk through everything with you at your pace.
+</p>
+</section>
+
+<!-- FORM -->
+<form id="pomp-basic-form" method="POST" action="https://hook.us2.make.com/yje83hyt1q03zek4mwlz1fe9l3ghl4ri">
+<input type="hidden" id="SubmissionType" name="SubmissionType" value="">
+
+<!-- DISPOSITION -->
+<div class="form-block">
+<label class="form-block__label">How would you like your remains handled?</label>
+<div class="checklist-group" data-single-select="disposition">
+
+<label class="checklist-option">
+<input type="checkbox" name="disposition" value="burial">
+<span class="check-label-text">Burial</span>
+</label>
+
+<label class="checklist-option">
+<input type="checkbox" name="disposition" value="cremation">
+<span class="check-label-text">Cremation</span>
+</label>
+
+<label class="checklist-option">
+<input type="checkbox" name="disposition" value="both">
+<span class="check-label-text">Both — cremation with burial of ashes</span>
+</label>
+
+<label class="checklist-option">
+<input type="checkbox" name="disposition" value="not_sure">
+<span class="check-label-text">Not sure</span>
+</label>
+
+<label class="checklist-option">
+<input type="checkbox" id="disposition_other_chk" name="disposition" value="other">
+<span class="check-label-text">Other</span>
+<input type="text" id="disposition_other_text" class="conditional inline-text" placeholder="Describe briefly">
+</label>
+
+</div>
+</div>
+
+<!-- SERVICES -->
+<div class="form-block conditional" id="block-services">
+<label class="form-block__label">Which services would you like to include?</label>
+<div class="checklist-group">
+
+<label class="checklist-option">
+<input type="checkbox" name="services_selected" value="viewing">
+<span class="check-label-text">Viewing / Showing – a chance for loved ones to see the body</span>
+</label>
+
+<label class="checklist-option">
+<input type="checkbox" name="services_selected" value="memorial">
+<span class="check-label-text">Memorial Service – typically a more somber, reflective experience</span>
+</label>
+
+<label class="checklist-option">
+<input type="checkbox" name="services_selected" value="celebration">
+<span class="check-label-text">Celebration of Life – more grateful, relaxed environment</span>
+</label>
+
+</div>
+</div>
+
+<!-- VIEWING LOCATION -->
+<div class="form-block conditional" id="block-viewing">
+<label class="form-block__label">Viewing Location</label>
+<div class="checklist-group" data-single-select="viewing_location">
+
+<label class="checklist-option"><input type="checkbox" name="viewing_location" value="funeral_home"><span class="check-label-text">Funeral Home</span></label>
+<label class="checklist-option"><input type="checkbox" name="viewing_location" value="home"><span class="check-label-text">My Home</span></label>
+<label class="checklist-option"><input type="checkbox" name="viewing_location" value="church"><span class="check-label-text">Church</span></label>
+<label class="checklist-option"><input type="checkbox" name="viewing_location" value="graveside"><span class="check-label-text">Graveside</span></label>
+<label class="checklist-option"><input type="checkbox" name="viewing_location" value="event_venue"><span class="check-label-text">Event Venue</span></label>
+<label class="checklist-option">
+<input type="checkbox" id="viewing_location_other_chk" name="viewing_location" value="other">
+<span class="check-label-text">Other (specify)</span>
+<input type="text" id="viewing_location_other_text" class="conditional inline-text" placeholder="Describe another location">
+</label>
+<label class="checklist-option"><input type="checkbox" name="viewing_location" value="not_sure"><span class="check-label-text">Not Sure</span></label>
+
+</div>
+</div>
+
+<!-- MEMORIAL LOCATION -->
+<div class="form-block conditional" id="block-memorial">
+<label class="form-block__label">Memorial Service Location</label>
+<div class="checklist-group" data-single-select="memorial_location">
+
+<label class="checklist-option"><input type="checkbox" name="memorial_location" value="funeral_home"><span class="check-label-text">Funeral Home</span></label>
+<label class="checklist-option"><input type="checkbox" name="memorial_location" value="home"><span class="check-label-text">My Home</span></label>
+<label class="checklist-option"><input type="checkbox" name="memorial_location" value="church"><span class="check-label-text">Church</span></label>
+<label class="checklist-option"><input type="checkbox" name="memorial_location" value="graveside"><span class="check-label-text">Graveside</span></label>
+<label class="checklist-option"><input type="checkbox" name="memorial_location" value="event_venue"><span class="check-label-text">Event Venue</span></label>
+<label class="checklist-option">
+<input type="checkbox" id="memorial_location_other_chk" name="memorial_location" value="other">
+<span class="check-label-text">Other</span>
+<input type="text" id="memorial_location_other_text" class="conditional inline-text" placeholder="Describe another location">
+</label>
+<label class="checklist-option"><input type="checkbox" name="memorial_location" value="not_sure"><span class="check-label-text">Not Sure</span></label>
+
+</div>
+</div>
+
+<!-- CELEBRATION LOCATION -->
+<div class="form-block conditional" id="block-celebration">
+<label class="form-block__label">Celebration of Life Location</label>
+<div class="checklist-group" data-single-select="celebration_location">
+
+<label class="checklist-option"><input type="checkbox" name="celebration_location" value="funeral_home"><span class="check-label-text">Funeral Home</span></label>
+<label class="checklist-option"><input type="checkbox" name="celebration_location" value="home"><span class="check-label-text">My Home</span></label>
+<label class="checklist-option"><input type="checkbox" name="celebration_location" value="church"><span class="check-label-text">Church</span></label>
+<label class="checklist-option"><input type="checkbox" name="celebration_location" value="graveside"><span class="check-label-text">Graveside</span></label>
+<label class="checklist-option"><input type="checkbox" name="celebration_location" value="event_venue"><span class="check-label-text">Event Venue</span></label>
+<label class="checklist-option">
+<input type="checkbox" id="celebration_location_other_chk" name="celebration_location" value="other">
+<span class="check-label-text">Other (specify)</span>
+<input type="text" id="celebration_location_other_text" class="conditional inline-text" placeholder="Describe another location">
+</label>
+<label class="checklist-option"><input type="checkbox" name="celebration_location" value="not_sure"><span class="check-label-text">Not Sure</span></label>
+
+</div>
+</div>
+
+<!-- FUNDING -->
+<div class="form-block" id="block-funding">
+<label class="form-block__label">Would you like help reviewing options to fund your final plans?</label>
+<div class="checklist-group" data-single-select>
+
+<label class="checklist-option">
+<input type="checkbox" name="funding_help_requested" value="yes">
+<span class="check-label-text">Yes — I'd like help reviewing options</span>
+</label>
+
+<label class="checklist-option">
+<input type="checkbox" name="funding_help_requested" value="no">
+<span class="check-label-text">No — I already have a plan</span>
+</label>
+
+<label class="checklist-option">
+<input type="checkbox" name="funding_help_requested" value="not_sure">
+<span class="check-label-text">Not sure yet</span>
+</label>
+
+</div>
+<p class="form-block__hint">This is optional and doesn't obligate you to anything.</p>
+</div>
+
+<!-- CONTACT -->
+<div class="form-block" id="block-person">
+<label class="form-block__label">Where should we send your basic outline?</label>
+<input type="text" id="full_name" name="full_name" placeholder="Full Name">
+<input type="tel" id="phone" name="phone" placeholder="Phone Number">
+<input type="email" id="email" name="email" placeholder="Email Address">
+</div>
+
+<button id="BasicSubmit" class="submit-basic" type="submit">Send Me The Link</button>
+
+</form>
+
+<!-- CONFIRMATION -->
+<section class="pomp-confirm" id="basic-confirmation">
+<div class="pomp-confirm__icon" aria-hidden="true">✦</div>
+<h3 class="pomp-confirm__heading">You've Done the Hardest Part</h3>
+<p class="pomp-confirm__body">
+Completing this step is one of the most thoughtful things you can do for the people you love.
+</p>
+<p class="pomp-confirm__body">
+By sharing your basic wishes, you've helped remove uncertainty and stress for your family in the future.
+</p>
+<p class="pomp-confirm__body">
+You are <strong>not expected to do everything today</strong>. Many people choose to add details later or complete the rest with guidance.
+</p>
+<p class="pomp-confirm__body">
+If you have questions, or would like help continuing, you can speak directly with an advisor.
+</p>
+<div class="pomp-confirm__contact">
+<p class="pomp-confirm__contact-label">Call for help or guidance:</p>
+<a href="tel:+16157160077" class="pomp-confirm__phone">(615) 716-0077</a>
+<p class="pomp-confirm__contact-note">There's no obligation — just clear answers and support when you want it.</p>
+</div>
+</section>
