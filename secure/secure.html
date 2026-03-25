@@ -261,185 +261,261 @@ placeholder="Flowers, overall requests, etc"
 
 </section>
 <section id="SECTION_VIEWING" class="form-section">
-<h4>Viewing</h4>
+  <h4>Viewing</h4>
 
-<div class="form-block">
-<label>Location</label>
-<select name="viewing_location_place">
-<option value="">Select location</option>
-<option value="funeral_home">Funeral Home</option>
-<option value="church">Church</option>
-<option value="graveside">Graveside</option>
-<option value="home">Home</option>
-<option value="other">Other</option>
-</select>
-</div>
+  <div class="form-block">
+    <label>Location Type</label>
+    <select name="viewing_location_type" id="viewing_location_type">
+      <option value="">Select location</option>
+      <option value="funeral_home">Funeral Home</option>
+      <option value="church">Church</option>
+      <option value="graveside">Graveside</option>
+      <option value="home">Home</option>
+      <option value="event_venue">Event Venue</option>
+      <option value="other">Other</option>
+    </select>
+  </div>
 
-<div class="form-block" id="viewing_location_other_block">
-<label>Other Location</label>
-<input
-type="text"
-name="viewing_location_other"
-id="viewing_location_other"
-placeholder="Describe location"
->
-</div>
+  <div class="form-block">
+    <label>Location Name</label>
+    <input
+      type="text"
+      name="viewing_location_name"
+      id="viewing_location_name"
+      placeholder="Funeral home, church, venue, residence, etc."
+    >
+  </div>
 
-<div class="form-block">
-<label>Location Phone</label>
-<input type="text" name="viewing_location_call">
-</div>
+  <div class="form-block">
+    <label>Location Address</label>
+    <input
+      type="text"
+      name="viewing_location_address"
+      id="viewing_location_address"
+      placeholder="Street address"
+    >
+  </div>
 
-<div class="form-block">
-<label>Spiritual / Cultural Traditions</label>
-<textarea name="viewing_spiritual_traditions_notes"></textarea>
-</div>
+  <div class="form-block">
+    <label>Location Phone</label>
+    <input
+      type="text"
+      name="viewing_location_phone"
+      id="viewing_location_phone"
+      placeholder="Phone number"
+    >
+  </div>
 
-<div class="form-block">
-<label>Jewelry Notes</label>
-<textarea name="viewing_jewelry_notes"></textarea>
-</div>
+  <div class="form-block" id="viewing_location_other_block">
+    <label>Other Location Notes</label>
+    <input
+      type="text"
+      name="viewing_location_other"
+      id="viewing_location_other"
+      placeholder="Anything special about the location"
+    >
+  </div>
 
-<div class="form-block">
-<label>Clothing Notes</label>
-<textarea name="viewing_clothing_notes"></textarea>
-</div>
+  <div class="form-block">
+    <label>Spiritual / Cultural Traditions</label>
+    <textarea name="viewing_spiritual_traditions_notes"></textarea>
+  </div>
+
+  <div class="form-block">
+    <label>Jewelry Notes</label>
+    <textarea name="viewing_jewelry_notes"></textarea>
+  </div>
+
+  <div class="form-block">
+    <label>Clothing Notes</label>
+    <textarea name="viewing_clothing_notes"></textarea>
+  </div>
+</section>
 
 </section>
-<section id="SECTION_MEMORIAL" class="form-section">
-<h4>Memorial</h4>
+<<section id="SECTION_MEMORIAL" class="form-section">
+  <h4>Memorial</h4>
 
-<div class="form-block">
-<label>Location</label>
-<select name="memorial_location_place">
-<option value="">Select location</option>
-<option value="funeral_home">Funeral Home</option>
-<option value="church">Church</option>
-<option value="graveside">Graveside</option>
-<option value="home">Home</option>
-<option value="other">Other</option>
-</select>
-</div>
+  <div class="form-block">
+    <label>Location Type</label>
+    <select name="memorial_location_type" id="memorial_location_type">
+      <option value="">Select location</option>
+      <option value="funeral_home">Funeral Home</option>
+      <option value="church">Church</option>
+      <option value="graveside">Graveside</option>
+      <option value="home">Home</option>
+      <option value="event_venue">Event Venue</option>
+      <option value="other">Other</option>
+    </select>
+  </div>
 
-<div class="form-block" id="memorial_location_other_block">
-<label>Other Location</label>
-<input
-type="text"
-name="memorial_location_other"
-id="memorial_location_other"
-placeholder="Describe location"
->
-</div>
+  <div class="form-block">
+    <label>Location Name</label>
+    <input
+      type="text"
+      name="memorial_location_name"
+      id="memorial_location_name"
+      placeholder="Funeral home, church, venue, residence, etc."
+    >
+  </div>
 
-<div class="form-block">
-<label>Location Phone</label>
-<input type="text" name="memorial_location_call">
-</div>
+  <div class="form-block">
+    <label>Location Address</label>
+    <input
+      type="text"
+      name="memorial_location_address"
+      id="memorial_location_address"
+      placeholder="Street address"
+    >
+  </div>
 
-<div class="form-block">
-<label>Spiritual / Cultural Traditions</label>
-<textarea name="memorial_spiritual_traditions_notes"></textarea>
-</div>
+  <div class="form-block">
+    <label>Location Phone</label>
+    <input
+      type="text"
+      name="memorial_location_phone"
+      id="memorial_location_phone"
+      placeholder="Phone number"
+    >
+  </div>
 
+  <div class="form-block" id="memorial_location_other_block">
+    <label>Other Location Notes</label>
+    <input
+      type="text"
+      name="memorial_location_other"
+      id="memorial_location_other"
+      placeholder="Anything special about the location"
+    >
+  </div>
+
+  <div class="form-block">
+    <label>Spiritual / Cultural Traditions</label>
+    <textarea name="memorial_spiritual_traditions_notes"></textarea>
+  </div>
 </section>
+
 <section id="SECTION_CELEBRATION" class="form-section">
+  <h4>Celebration of Life</h4>
 
-<h4>Celebration of Life</h4>
+  <div class="form-subsection">
+    <h5>Service Details</h5>
+  </div>
 
-<!-- Location -->
-<div class="form-block">
-<label>Location</label>
-<select name="celebration_location_place" id="celebration_location_place">
-<option value="">Select location</option>
-<option value="funeral_home">Funeral Home</option>
-<option value="church">Church</option>
-<option value="graveside">Graveside</option>
-<option value="home">Home</option>
-<option value="event_venue">Event Venue</option>
-<option value="outdoor">Outdoor / Park</option>
-<option value="other">Other</option>
-</select>
-</div>
+  <div class="form-block">
+    <label>Location Type</label>
+    <select name="celebration_location_type" id="celebration_location_type">
+      <option value="">Select location</option>
+      <option value="funeral_home">Funeral Home</option>
+      <option value="church">Church</option>
+      <option value="graveside">Graveside</option>
+      <option value="home">Home</option>
+      <option value="event_venue">Event Venue</option>
+      <option value="outdoor">Outdoor / Park</option>
+      <option value="other">Other</option>
+    </select>
+  </div>
 
-<!-- Other Location (manual override) -->
-<div class="form-block" id="celebration_location_other_block">
-<label>Other Location</label>
-<input
-type="text"
-name="celebration_location_other"
-id="celebration_location_other"
-placeholder="Describe location"
->
-</div>
+  <div class="form-block">
+    <label>Location Name</label>
+    <input
+      type="text"
+      name="celebration_location_name"
+      id="celebration_location_name"
+      placeholder="Funeral home, church, venue, park, residence, etc."
+    >
+  </div>
 
-<!-- Location Phone -->
-<div class="form-block">
-<label>Location Phone</label>
-<input
-type="text"
-name="celebration_location_call"
-id="celebration_location_call"
-placeholder="Phone number for venue"
->
-</div>
+  <div class="form-block">
+    <label>Location Address</label>
+    <input
+      type="text"
+      name="celebration_location_address"
+      id="celebration_location_address"
+      placeholder="Street address"
+    >
+  </div>
 
-<!-- Spiritual / Cultural Traditions -->
-<div class="form-block">
-<label>Spiritual / Cultural Traditions</label>
-<textarea
-name="celebration_spiritual_traditions_notes"
-id="celebration_spiritual_traditions_notes"
-rows="4"
-placeholder="Any religious, spiritual, or cultural elements to incorporate"
-></textarea>
-</div>
+  <div class="form-block">
+    <label>Location Phone</label>
+    <input
+      type="text"
+      name="celebration_location_phone"
+      id="celebration_location_phone"
+      placeholder="Phone number for venue"
+    >
+  </div>
 
-<!-- ===============================
-Celebration Production Details
-=============================== -->
+  <div class="form-block" id="celebration_location_other_block">
+    <label>Other Location Notes</label>
+    <input
+      type="text"
+      name="celebration_location_other"
+      id="celebration_location_other"
+      placeholder="Anything special about the location"
+    >
+  </div>
 
-<div class="form-subsection">
-<h5>Production Details</h5>
-</div>
+  <div class="form-block">
+    <label>Spiritual / Cultural Traditions</label>
+    <textarea
+      name="celebration_spiritual_traditions_notes"
+      id="celebration_spiritual_traditions_notes"
+      rows="4"
+      placeholder="Any religious, spiritual, or cultural elements to incorporate"
+    ></textarea>
+  </div>
 
-<div class="form-block">
-<label>Flowers / Floral Preferences</label>
-<input type="text" name="celebration_flowers" placeholder="Type, colors, style">
-</div>
+  <div class="form-subsection">
+    <h5>Production Details</h5>
+  </div>
 
-<div class="form-block">
-<label>Photo Slideshow</label>
-<textarea name="celebration_slideshow" rows="3"
-placeholder="Yes/No, who will prepare, screen needed, duration, etc"></textarea>
-</div>
+  <div class="form-block">
+    <label>Flowers / Floral Preferences</label>
+    <input type="text" name="celebration_flowers" placeholder="Type, colors, style">
+  </div>
 
-<div class="form-block">
-<label>MC / Host</label>
-<input type="text" name="celebration_mc" placeholder="Who will emcee the event">
-</div>
+  <div class="form-block">
+    <label>Photo Slideshow</label>
+    <textarea
+      name="celebration_slideshow"
+      rows="3"
+      placeholder="Yes/No, who will prepare, screen needed, duration, etc"
+    ></textarea>
+  </div>
 
-<div class="form-block">
-<label>Prayer Leader</label>
-<input type="text" name="celebration_prayer_leader" placeholder="Who will lead prayer or invocation">
-</div>
+  <div class="form-block">
+    <label>MC / Host</label>
+    <input type="text" name="celebration_mc" placeholder="Who will emcee the event">
+  </div>
 
-<div class="form-block">
-<label>Live Music</label>
-<input type="text" name="celebration_music_live" placeholder="Band, soloist, DJ, none">
-</div>
+  <div class="form-block">
+    <label>Prayer Leader</label>
+    <input type="text" name="celebration_prayer_leader" placeholder="Who will lead prayer or invocation">
+  </div>
 
-<div class="form-block">
-<label>Catering Notes</label>
-<textarea name="celebration_catering_notes" rows="3"
-placeholder="Food style, vendor, potluck, bar service, etc"></textarea>
-</div>
+  <div class="form-block">
+    <label>Live Music</label>
+    <input type="text" name="celebration_music_live" placeholder="Band, soloist, DJ, none">
+  </div>
 
-<div class="form-block">
-<label>Decor Theme</label>
-<input type="text" name="celebration_decor_theme"
-placeholder="Color palette, aesthetic direction, theme">
-</div>
+  <div class="form-block">
+    <label>Catering Notes</label>
+    <textarea
+      name="celebration_catering_notes"
+      rows="3"
+      placeholder="Food style, vendor, potluck, bar service, etc"
+    ></textarea>
+  </div>
 
+  <div class="form-block">
+    <label>Decor Theme</label>
+    <input
+      type="text"
+      name="celebration_decor_theme"
+      placeholder="Color palette, aesthetic direction, theme"
+    >
+  </div>
 </section>
 <section class="form-section" id="SECTION_VETERAN">
 <h4>Veteran / Military Information</h4>
@@ -497,7 +573,7 @@ placeholder="Color palette, aesthetic direction, theme">
 <input
 type="text"
 name="dob"
-placeholder="MMDDYYYY"
+placeholder="MM/DD/YYYY"
 inputmode="numeric"
 autocomplete="bday"
 >
