@@ -1,6 +1,6 @@
 /* =========================================================
 SECURE 2.0 — CLEAN ARCHITECTURE (CLEANED)
-Schema 3 Stable
+Schema 4 VMC Migration
 ========================================================= */
 
 (function () {
@@ -171,9 +171,7 @@ function hydrateServices(services) {
 
   if (services.viewing) {
     const v = services.viewing;
-
     hydrateServiceLocation("viewing", v);
-
     setFieldValue("viewing_spiritual_traditions_notes", v.spiritual_traditions_notes);
     setFieldValue("viewing_jewelry_notes", v.jewelry_notes);
     setFieldValue("viewing_clothing_notes", v.clothing_notes);
@@ -181,17 +179,13 @@ function hydrateServices(services) {
 
   if (services.memorial) {
     const m = services.memorial;
-
     hydrateServiceLocation("memorial", m);
-
     setFieldValue("memorial_spiritual_traditions_notes", m.spiritual_traditions_notes);
   }
 
   if (services.celebration) {
     const c = services.celebration;
-
     hydrateServiceLocation("celebration", c);
-
     setFieldValue("celebration_spiritual_traditions_notes", c.spiritual_traditions_notes);
 
     const pd = c.production_details || {};
@@ -203,33 +197,6 @@ function hydrateServices(services) {
     setFieldValue("celebration_catering_notes", pd.catering_notes);
     setFieldValue("celebration_decor_theme", pd.decor_theme);
   }
-}
-
-if (services.memorial) {
-const m = services.memorial;
-setFieldValue("memorial_location_place", m.location_place);
-setFieldValue("memorial_location_call", m.location_call);
-setFieldValue("memorial_location_other", m.location_other);
-setFieldValue("memorial_spiritual_traditions_notes", m.spiritual_traditions_notes);
-}
-
-if (services.celebration) {
-const c = services.celebration;
-setFieldValue("celebration_location_place", c.location_place);
-setFieldValue("celebration_location_call", c.location_call);
-setFieldValue("celebration_location_other", c.location_other);
-setFieldValue("celebration_spiritual_traditions_notes", c.spiritual_traditions_notes);
-
-// Schema 3: production details (safe even if missing)
-const pd = c.production_details || {};
-setFieldValue("celebration_flowers", pd.flowers);
-setFieldValue("celebration_slideshow", pd.slideshow);
-setFieldValue("celebration_mc", pd.mc);
-setFieldValue("celebration_prayer_leader", pd.prayer_leader);
-setFieldValue("celebration_music_live", pd.music_live);
-setFieldValue("celebration_catering_notes", pd.catering_notes);
-setFieldValue("celebration_decor_theme", pd.decor_theme);
-}
 }
 
 function hydrateLegal(legal) {
