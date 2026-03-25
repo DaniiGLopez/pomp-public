@@ -56,6 +56,54 @@ function hasAnyValue(obj) {
 return Object.values(obj).some(v => (v ?? "").toString().trim() !== "");
 }
 
+function firstNonEmpty(...values) {
+  for (const value of values) {
+    if (value !== undefined && value !== null && String(value).trim() !== "") {
+      return value;
+    }
+  }
+  return "";
+}
+
+function hydrateServiceLocation(serviceKey, serviceData) {
+  if (!serviceData) return;
+
+  setFieldValue(
+    `${serviceKey}_location_type`,
+    firstNonEmpty(serviceData.location_type, serviceData.location_place)
+  );
+
+  setFieldValue(
+    `${serviceKey}_location_name`,
+    firstNonEmpty(serviceData.location_name)
+  );
+
+  setFieldValue(
+    `${serviceKey}_location_address`,
+    firstNonEmpty(serviceData.location_address)
+  );
+
+  setFieldValue(
+    `${serviceKey}_location_phone`,
+    firstNonEmpty(serviceData.location_phone, serviceData.location_call)
+  );
+
+  setFieldValue(
+    `${serviceKey}_location_other`,
+    firstNonEmpty(serviceData.location_other)
+  );
+}
+
+function buildServiceLocationFromForm(serviceKey) {
+  return {
+    location_type: document.querySelector(`[name="${serviceKey}_location_type"]`)?.value || "",
+    location_name: document.querySelector(`[name="${serviceKey}_location_name"]`)?.value || "",
+    location_address: document.querySelector(`[name="${serviceKey}_location_address"]`)?.value || "",
+    location_phone: document.querySelector(`[name="${serviceKey}_location_phone"]`)?.value || "",
+    location_other: document.querySelector(`[name="${serviceKey}_location_other"]`)?.value || ""
+  };
+}
+
 /* =========================================================
 HYDRATION
 ========================================================= */
@@ -116,19 +164,45 @@ setFieldValue("last_name", person.last_name);
 }
 
 function hydrateServices(services) {
-if (!services) return;
+  if (!services) return;
 
-setFieldValue("mood_service", services.service_mood);
-setFieldValue("special_requests_service", services.special_requests);
+  setFieldValue("mood_service", services.service_mood);
+  setFieldValue("special_requests_service", services.special_requests);
 
-if (services.viewing) {
-const v = services.viewing;
-setFieldValue("viewing_location_place", v.location_place);
-setFieldValue("viewing_location_call", v.location_call);
-setFieldValue("viewing_location_other", v.location_other);
-setFieldValue("viewing_spiritual_traditions_notes", v.spiritual_traditions_notes);
-setFieldValue("viewing_jewelry_notes", v.jewelry_notes);
-setFieldValue("viewing_clothing_notes", v.clothing_notes);
+  if (services.viewing) {
+    const v = services.viewing;
+
+    hydrateServiceLocation("viewing", v);
+
+    setFieldValue("viewing_spiritual_traditions_notes", v.spiritual_traditions_notes);
+    setFieldValue("viewing_jewelry_notes", v.jewelry_notes);
+    setFieldValue("viewing_clothing_notes", v.clothing_notes);
+  }
+
+  if (services.memorial) {
+    const m = services.memorial;
+
+    hydrateServiceLocation("memorial", m);
+
+    setFieldValue("memorial_spiritual_traditions_notes", m.spiritual_traditions_notes);
+  }
+
+  if (services.celebration) {
+    const c = services.celebration;
+
+    hydrateServiceLocation("celebration", c);
+
+    setFieldValue("celebration_spiritual_traditions_notes", c.spiritual_traditions_notes);
+
+    const pd = c.production_details || {};
+    setFieldValue("celebration_flowers", pd.flowers);
+    setFieldValue("celebration_slideshow", pd.slideshow);
+    setFieldValue("celebration_mc", pd.mc);
+    setFieldValue("celebration_prayer_leader", pd.prayer_leader);
+    setFieldValue("celebration_music_live", pd.music_live);
+    setFieldValue("celebration_catering_notes", pd.catering_notes);
+    setFieldValue("celebration_decor_theme", pd.decor_theme);
+  }
 }
 
 if (services.memorial) {
@@ -311,47 +385,54 @@ zip: document.querySelector('[name="zip"]')?.value.trim() || ""
 }
 
 function buildServicesFromForm(snapshot) {
-// Ensure structure exists (do NOT replace the whole object)
-snapshot.services = snapshot.services || {};
-snapshot.services.viewing = snapshot.services.viewing || {};
-snapshot.services.memorial = snapshot.services.memorial || {};
-snapshot.services.celebration = snapshot.services.celebration || {};
-snapshot.services.celebration.production_details = snapshot.services.celebration.production_details || {};
+  snapshot.services = snapshot.services || {};
+  snapshot.services.viewing = snapshot.services.viewing || {};
+  snapshot.services.memorial = snapshot.services.memorial || {};
+  snapshot.services.celebration = snapshot.services.celebration || {};
+  snapshot.services.celebration.production_details =
+    snapshot.services.celebration.production_details || {};
 
-// Top-level service fields
-snapshot.services.service_mood = document.querySelector('[name="mood_service"]')?.value || "";
-snapshot.services.special_requests = document.querySelector('[name="special_requests_service"]')?.value || "";
+  snapshot.services.service_mood =
+    document.querySelector('[name="mood_service"]')?.value || "";
+  snapshot.services.special_requests =
+    document.querySelector('[name="special_requests_service"]')?.value || "";
 
-// Viewing
-snapshot.services.viewing.location_place = document.querySelector('[name="viewing_location_place"]')?.value || "";
-snapshot.services.viewing.location_call = document.querySelector('[name="viewing_location_call"]')?.value || "";
-snapshot.services.viewing.location_other = document.querySelector('[name="viewing_location_other"]')?.value || "";
-snapshot.services.viewing.spiritual_traditions_notes = document.querySelector('[name="viewing_spiritual_traditions_notes"]')?.value || "";
-snapshot.services.viewing.jewelry_notes = document.querySelector('[name="viewing_jewelry_notes"]')?.value || "";
-snapshot.services.viewing.clothing_notes = document.querySelector('[name="viewing_clothing_notes"]')?.value || "";
+  snapshot.services.viewing = {
+    ...snapshot.services.viewing,
+    ...buildServiceLocationFromForm("viewing"),
+    spiritual_traditions_notes:
+      document.querySelector('[name="viewing_spiritual_traditions_notes"]')?.value || "",
+    jewelry_notes:
+      document.querySelector('[name="viewing_jewelry_notes"]')?.value || "",
+    clothing_notes:
+      document.querySelector('[name="viewing_clothing_notes"]')?.value || ""
+  };
 
-// Memorial
-snapshot.services.memorial.location_place = document.querySelector('[name="memorial_location_place"]')?.value || "";
-snapshot.services.memorial.location_call = document.querySelector('[name="memorial_location_call"]')?.value || "";
-snapshot.services.memorial.location_other = document.querySelector('[name="memorial_location_other"]')?.value || "";
-snapshot.services.memorial.spiritual_traditions_notes = document.querySelector('[name="memorial_spiritual_traditions_notes"]')?.value || "";
+  snapshot.services.memorial = {
+    ...snapshot.services.memorial,
+    ...buildServiceLocationFromForm("memorial"),
+    spiritual_traditions_notes:
+      document.querySelector('[name="memorial_spiritual_traditions_notes"]')?.value || ""
+  };
 
-// Celebration
-snapshot.services.celebration.location_place = document.querySelector('[name="celebration_location_place"]')?.value || "";
-snapshot.services.celebration.location_call = document.querySelector('[name="celebration_location_call"]')?.value || "";
-snapshot.services.celebration.location_other = document.querySelector('[name="celebration_location_other"]')?.value || "";
-snapshot.services.celebration.spiritual_traditions_notes = document.querySelector('[name="celebration_spiritual_traditions_notes"]')?.value || "";
+  snapshot.services.celebration = {
+    ...snapshot.services.celebration,
+    ...buildServiceLocationFromForm("celebration"),
+    spiritual_traditions_notes:
+      document.querySelector('[name="celebration_spiritual_traditions_notes"]')?.value || "",
+    production_details: snapshot.services.celebration.production_details || {}
+  };
 
-// Schema 3: production_details (always visible in Secure)
-const pd = snapshot.services.celebration.production_details;
-pd.flowers = document.querySelector('[name="celebration_flowers"]')?.value || "";
-pd.slideshow = document.querySelector('[name="celebration_slideshow"]')?.value || "";
-pd.mc = document.querySelector('[name="celebration_mc"]')?.value || "";
-pd.prayer_leader = document.querySelector('[name="celebration_prayer_leader"]')?.value || "";
-pd.music_live = document.querySelector('[name="celebration_music_live"]')?.value || "";
-pd.catering_notes = document.querySelector('[name="celebration_catering_notes"]')?.value || "";
-pd.decor_theme = document.querySelector('[name="celebration_decor_theme"]')?.value || "";
+  const pd = snapshot.services.celebration.production_details;
+  pd.flowers = document.querySelector('[name="celebration_flowers"]')?.value || "";
+  pd.slideshow = document.querySelector('[name="celebration_slideshow"]')?.value || "";
+  pd.mc = document.querySelector('[name="celebration_mc"]')?.value || "";
+  pd.prayer_leader = document.querySelector('[name="celebration_prayer_leader"]')?.value || "";
+  pd.music_live = document.querySelector('[name="celebration_music_live"]')?.value || "";
+  pd.catering_notes = document.querySelector('[name="celebration_catering_notes"]')?.value || "";
+  pd.decor_theme = document.querySelector('[name="celebration_decor_theme"]')?.value || "";
 }
+
 function buildLegalFromForm(snapshot) {
 snapshot.legal = snapshot.legal || {};
 
