@@ -98,6 +98,9 @@ function renderServiceBlock(targetListId, service, options = {}) {
   const lines = [];
   const productionLines = [];
 
+  console.log("renderServiceBlock target", targetListId);
+console.log("renderServiceBlock service", service);
+  
   const locationType = service?.location_type || service?.location_place || "";
   const locationPhone = service?.location_phone || service?.location_call || "";
 
@@ -143,7 +146,8 @@ function renderServiceBlock(targetListId, service, options = {}) {
     if (nonEmpty(pd.catering_notes)) productionLines.push(`Catering: ${pd.catering_notes}`);
     if (nonEmpty(pd.decor_theme)) productionLines.push(`Decor Theme: ${pd.decor_theme}`);
   }
-
+console.log("renderServiceBlock lines", targetListId, lines);
+console.log("renderServiceBlock productionLines", targetListId, productionLines);
   makeSimpleList(targetListId, lines);
 
   if (options.productionTargetId) {
@@ -367,6 +371,10 @@ const viewing = snapshot?.services?.viewing;
 const memorial = snapshot?.services?.memorial;
 const celebration = snapshot?.services?.celebration;
 
+console.log("GUIDE viewing", viewing);
+console.log("GUIDE memorial", memorial);
+console.log("GUIDE celebration", celebration);
+
 const viewingHasContent = [
   viewing?.location_type,
   viewing?.location_place,
@@ -404,26 +412,28 @@ if (memorialHasContent) {
 } else {
   hide("blockMemorial");
 }
-if (anyNonEmpty(celebration) || anyNonEmpty(celebration?.production_details)) {
+const celebrationHasServiceDetails = [
+  celebration?.location_type,
+  celebration?.location_place,
+  celebration?.location_name,
+  celebration?.location_address,
+  celebration?.location_phone,
+  celebration?.location_call,
+  celebration?.location_other,
+  celebration?.spiritual_traditions_notes
+].some(nonEmpty);
+
+const celebrationHasProductionDetails = anyNonEmpty(celebration?.production_details);
+
+if (celebrationHasServiceDetails || celebrationHasProductionDetails) {
   show("blockCelebration");
 
-  const hasServiceDetails = [
-    celebration?.location_type,
-    celebration?.location_place,
-    celebration?.location_name,
-    celebration?.location_address,
-    celebration?.location_phone,
-    celebration?.location_call,
-    celebration?.location_other,
-    celebration?.spiritual_traditions_notes
-  ].some(nonEmpty);
-
- if (hasServiceDetails) {
-  show("celebrationServiceBlock");
-} else {
-  hide("celebrationServiceBlock");
-  makeSimpleList("celebration_list", []);
-}
+  if (celebrationHasServiceDetails) {
+    show("celebrationServiceBlock");
+  } else {
+    hide("celebrationServiceBlock");
+    makeSimpleList("celebration_list", []);
+  }
 
   renderServiceBlock("celebration_list", celebration, {
     productionTargetId: "celebration_production_list",
@@ -432,7 +442,7 @@ if (anyNonEmpty(celebration) || anyNonEmpty(celebration?.production_details)) {
 } else {
   hide("blockCelebration");
 }
-
+  
 renderContacts(snapshot?.contacts);
 renderInsurance(snapshot?.insurance);
 renderMusic(snapshot?.music);
