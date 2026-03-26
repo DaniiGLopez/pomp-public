@@ -98,8 +98,7 @@ function renderServiceBlock(targetListId, service, options = {}) {
   const lines = [];
   const productionLines = [];
 
-  console.log("renderServiceBlock target", targetListId);
-console.log("renderServiceBlock service", service);
+  
   
   const locationType = service?.location_type || service?.location_place || "";
   const locationPhone = service?.location_phone || service?.location_call || "";
@@ -146,8 +145,7 @@ console.log("renderServiceBlock service", service);
     if (nonEmpty(pd.catering_notes)) productionLines.push(`Catering: ${pd.catering_notes}`);
     if (nonEmpty(pd.decor_theme)) productionLines.push(`Decor Theme: ${pd.decor_theme}`);
   }
-console.log("renderServiceBlock lines", targetListId, lines);
-console.log("renderServiceBlock productionLines", targetListId, productionLines);
+
   makeSimpleList(targetListId, lines);
 
   if (options.productionTargetId) {
@@ -370,10 +368,6 @@ else { hide("svcRequestsBlock"); }
 const viewing = snapshot?.services?.viewing;
 const memorial = snapshot?.services?.memorial;
 const celebration = snapshot?.services?.celebration;
-
-console.log("GUIDE viewing", viewing);
-console.log("GUIDE memorial", memorial);
-console.log("GUIDE celebration", celebration);
 
 const viewingHasContent = [
   viewing?.location_type,
