@@ -80,44 +80,93 @@ node.appendChild(div);
 });
 }
 
-function renderServiceBlock(targetListId, service) {
-  const lines = [];
-
-  if (nonEmpty(service?.location_place)) {
-    const loc = service.location_place === "other" && nonEmpty(service?.location_other)
-      ? service.location_other
-      : service.location_place;
-    if (nonEmpty(loc)) lines.push(`Location: ${loc}`);
-  }
-
-  if (nonEmpty(service?.location_call))
-    lines.push(`Call / contact: ${service.location_call}`);
-
-  if (nonEmpty(service?.spiritual_traditions_notes))
-    lines.push(`Spiritual traditions: ${service.spiritual_traditions_notes}`);
-
-  if (nonEmpty(service?.jewelry_notes))
-    lines.push(`Jewelry: ${service.jewelry_notes}`);
-
-  if (nonEmpty(service?.clothing_notes))
-    lines.push(`Clothing: ${service.clothing_notes}`);
-
-  // ✨ Schema 3 — Production Details (only if present)
-  const pd = service?.production_details;
-
-  if (pd && anyNonEmpty(pd)) {
-    if (nonEmpty(pd.flowers)) lines.push(`Flowers: ${pd.flowers}`);
-    if (nonEmpty(pd.slideshow)) lines.push(`Photo slideshow: ${pd.slideshow}`);
-    if (nonEmpty(pd.mc)) lines.push(`Master of ceremonies: ${pd.mc}`);
-    if (nonEmpty(pd.prayer_leader)) lines.push(`Prayer leader: ${pd.prayer_leader}`);
-    if (nonEmpty(pd.music_live)) lines.push(`Live music: ${pd.music_live}`);
-    if (nonEmpty(pd.catering_notes)) lines.push(`Catering: ${pd.catering_notes}`);
-    if (nonEmpty(pd.decor_theme)) lines.push(`Decor theme: ${pd.decor_theme}`);
-  }
-
-  if (lines.length) makeSimpleList(targetListId, lines);
+function formatLocationType(value) {
+  const map = {
+    funeral_home: "Funeral Home",
+    church: "Church",
+    graveside: "Graveside",
+    home: "Home",
+    event_venue: "Event Venue",
+    outdoor: "Outdoor / Park",
+    other: "Other",
+    not_sure: "Not Sure"
+  };
+  return map[value] || value || "";
 }
 
+function renderServiceBlock(targetListId, service, options = {}) {
+  const lines = [];
+  const productionLines = [];
+
+  const locationType = service?.location_type || service?.location_place || "";
+  const locationPhone = service?.location_phone || service?.location_call || "";
+
+  if (nonEmpty(locationType)) {
+    lines.push(`Location Type: ${formatLocationType(locationType)}`);
+  }
+
+  if (nonEmpty(service?.location_name)) {
+    lines.push(`Location Name: ${service.location_name}`);
+  }
+
+  if (nonEmpty(service?.location_address)) {
+    lines.push(`Location Address: ${service.location_address}`);
+  }
+
+  if (nonEmpty(locationPhone)) {
+    lines.push(`Location Phone: ${locationPhone}`);
+  }
+
+  if (nonEmpty(service?.location_other)) {
+    lines.push(`Other Location Notes: ${service.location_other}`);
+  }
+
+  if (nonEmpty(service?.spiritual_traditions_notes)) {
+    lines.push(`Spiritual / Cultural Traditions: ${service.spiritual_traditions_notes}`);
+  }
+
+  if (nonEmpty(service?.jewelry_notes)) {
+    lines.push(`Jewelry: ${service.jewelry_notes}`);
+  }
+
+  if (nonEmpty(service?.clothing_notes)) {
+    lines.push(`Clothing: ${service.clothing_notes}`);
+  }
+
+  const pd = service?.production_details;
+  if (pd && anyNonEmpty(pd)) {
+    if (nonEmpty(pd.flowers)) productionLines.push(`Flowers: ${pd.flowers}`);
+    if (nonEmpty(pd.slideshow)) productionLines.push(`Photo Slideshow: ${pd.slideshow}`);
+    if (nonEmpty(pd.mc)) productionLines.push(`MC / Host: ${pd.mc}`);
+    if (nonEmpty(pd.prayer_leader)) productionLines.push(`Prayer Leader: ${pd.prayer_leader}`);
+    if (nonEmpty(pd.music_live)) productionLines.push(`Live Music: ${pd.music_live}`);
+    if (nonEmpty(pd.catering_notes)) productionLines.push(`Catering: ${pd.catering_notes}`);
+    if (nonEmpty(pd.decor_theme)) productionLines.push(`Decor Theme: ${pd.decor_theme}`);
+  }
+
+  makeSimpleList(targetListId, lines);
+
+  if (options.productionTargetId) {
+    const hasProduction = productionLines.length > 0;
+    const prodNode = el(options.productionTargetId);
+    const prodBlock = el(options.productionBlockId);
+
+    if (prodNode) {
+      prodNode.innerHTML = "";
+      productionLines.forEach(text => {
+        const div = document.createElement("div");
+        div.className = "pomp-item";
+        div.textContent = text;
+        prodNode.appendChild(div);
+      });
+    }
+
+    if (prodBlock) {
+      prodBlock.style.display = hasProduction ? "" : "none";
+    }
+  }
+}
+  
 /* ----------------------------------------------------------
 SECTION RENDERERS
 ---------------------------------------------------------- */
@@ -318,12 +367,67 @@ const viewing = snapshot?.services?.viewing;
 const memorial = snapshot?.services?.memorial;
 const celebration = snapshot?.services?.celebration;
 
-if (anyNonEmpty(viewing)) { show("blockViewing"); renderServiceBlock("viewing_list", viewing); }
-else { hide("blockViewing"); }
-if (anyNonEmpty(memorial)) { show("blockMemorial"); renderServiceBlock("memorial_list", memorial); }
-else { hide("blockMemorial"); }
-if (anyNonEmpty(celebration) || anyNonEmpty(celebration?.production_details)) { show("blockCelebration"); renderServiceBlock("celebration_list", celebration); }
-else { hide("blockCelebration"); }
+const viewingHasContent = [
+  viewing?.location_type,
+  viewing?.location_place,
+  viewing?.location_name,
+  viewing?.location_address,
+  viewing?.location_phone,
+  viewing?.location_call,
+  viewing?.location_other,
+  viewing?.spiritual_traditions_notes,
+  viewing?.jewelry_notes,
+  viewing?.clothing_notes
+].some(nonEmpty);
+
+if (viewingHasContent) {
+  show("blockViewing");
+  renderServiceBlock("viewing_list", viewing);
+} else {
+  hide("blockViewing");
+}
+
+const memorialHasContent = [
+  memorial?.location_type,
+  memorial?.location_place,
+  memorial?.location_name,
+  memorial?.location_address,
+  memorial?.location_phone,
+  memorial?.location_call,
+  memorial?.location_other,
+  memorial?.spiritual_traditions_notes
+].some(nonEmpty);
+
+if (memorialHasContent) {
+  show("blockMemorial");
+  renderServiceBlock("memorial_list", memorial);
+} else {
+  hide("blockMemorial");
+}
+if (anyNonEmpty(celebration) || anyNonEmpty(celebration?.production_details)) {
+  show("blockCelebration");
+
+  const hasServiceDetails = [
+    celebration?.location_type,
+    celebration?.location_place,
+    celebration?.location_name,
+    celebration?.location_address,
+    celebration?.location_phone,
+    celebration?.location_call,
+    celebration?.location_other,
+    celebration?.spiritual_traditions_notes
+  ].some(nonEmpty);
+
+  if (hasServiceDetails) show("celebrationServiceBlock");
+  else hide("celebrationServiceBlock");
+
+  renderServiceBlock("celebration_list", celebration, {
+    productionTargetId: "celebration_production_list",
+    productionBlockId: "celebrationProductionBlock"
+  });
+} else {
+  hide("blockCelebration");
+}
 
 renderContacts(snapshot?.contacts);
 renderInsurance(snapshot?.insurance);
