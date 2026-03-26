@@ -418,8 +418,12 @@ if (anyNonEmpty(celebration) || anyNonEmpty(celebration?.production_details)) {
     celebration?.spiritual_traditions_notes
   ].some(nonEmpty);
 
-  if (hasServiceDetails) show("celebrationServiceBlock");
-  else hide("celebrationServiceBlock");
+ if (hasServiceDetails) {
+  show("celebrationServiceBlock");
+} else {
+  hide("celebrationServiceBlock");
+  makeSimpleList("celebration_list", []);
+}
 
   renderServiceBlock("celebration_list", celebration, {
     productionTargetId: "celebration_production_list",
