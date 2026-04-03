@@ -175,39 +175,40 @@ SECTION RENDERERS
 ---------------------------------------------------------- */
 
 function renderContacts(contacts) {
-// Filter to valid rows first
-const valid = (Array.isArray(contacts) ? contacts : []).filter(c => anyNonEmpty(c));
-if (!valid.length) { hide("secContacts"); return; }
-show("secContacts");
+  const valid = (Array.isArray(contacts) ? contacts : []).filter(c => anyNonEmpty(c));
+  if (!valid.length) { hide("secContacts"); return; }
+  show("secContacts");
 
-const node = el("contacts_table");
-node.innerHTML = `
-<table>
-<thead>
-<tr>
-<th>Name</th>
-<th>Relationship</th>
-<th>Phone</th>
-<th>Email</th>
-<th>Address</th>
-<th>Notes</th>
-</tr>
-</thead>
-<tbody></tbody>
-</table>`;
+  const node = el("contacts_table");
+  node.innerHTML = `
+    <div class="pomp-table-scroll">
+      <table class="pomp-data-table">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Relationship</th>
+            <th>Phone</th>
+            <th>Email</th>
+            <th>Address</th>
+            <th>Notes</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>`;
 
-const tbody = node.querySelector("tbody");
-valid.forEach(c => {
-const tr = document.createElement("tr");
-tr.innerHTML = `
-<td>${escapeHtml(c.name || "")}</td>
-<td>${escapeHtml(c.relationship || "")}</td>
-<td>${escapeHtml(c.phone || "")}</td>
-<td>${escapeHtml(c.email || "")}</td>
-<td>${escapeHtml(c.address || "")}</td>
-<td>${escapeHtml(c.notes || "")}</td>`;
-tbody.appendChild(tr);
-});
+  const tbody = node.querySelector("tbody");
+  valid.forEach(c => {
+    const tr = document.createElement("tr");
+    tr.innerHTML = `
+      <td>${escapeHtml(c.name || "")}</td>
+      <td>${escapeHtml(c.relationship || "")}</td>
+      <td>${escapeHtml(c.phone || "")}</td>
+      <td>${escapeHtml(c.email || "")}</td>
+      <td>${escapeHtml(c.address || "")}</td>
+      <td>${escapeHtml(c.notes || "")}</td>`;
+    tbody.appendChild(tr);
+  });
 }
 
 function renderInsurance(insurance) {
