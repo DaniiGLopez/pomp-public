@@ -1,4 +1,5 @@
 (function () {
+console.log("LIVE GUIDE FILE LOADED");
 const WEBHOOK_URL = "https://hook.us2.make.com/eh74qn7yg2mey49vvu209tjeyhgtiwns";
 
 /* ----------------------------------------------------------
