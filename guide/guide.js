@@ -1,5 +1,4 @@
 (function () {
-console.log("LIVE GUIDE FILE LOADED");
 const WEBHOOK_URL = "https://hook.us2.make.com/eh74qn7yg2mey49vvu209tjeyhgtiwns";
 
 /* ----------------------------------------------------------
@@ -48,6 +47,14 @@ if (nonEmpty(p?.address)) parts.push(p.address);
 const cityLine = [p?.city, p?.state, p?.zip].filter(nonEmpty).join(" ");
 if (nonEmpty(cityLine)) parts.push(cityLine);
 return parts.join(", ");
+}
+
+function maskSSN(value) {
+  const digits = (value ?? "").toString().replace(/\D/g, "");
+  if (!digits) return "";
+  if (digits.length < 4) return "";
+  const last4 = digits.slice(-4);
+  return `***-**-${last4}`;
 }
 
 /* ----------------------------------------------------------
@@ -294,7 +301,7 @@ function renderLegal(legal) {
 const pairs = [
 { label: "Legal name", value: legal?.legal_name },
 { label: "Sex", value: legal?.sex },
-{ label: "Social Security #", value: legal?.social_security_number },
+{ label: "Social Security #", value: maskSSN(legal?.social_security_number) },
 { label: "Date of birth", value: legal?.dob },
 { label: "Place of birth", value: legal?.place_of_birth },
 { label: "County", value: legal?.county },
