@@ -57,6 +57,24 @@ function maskSSN(value) {
   return `***-**-${last4}`;
 }
 
+function formatDispositionPath(services) {
+  const disposition = (services?.disposition || "").toString().trim();
+  const otherText = (services?.disposition_other || "").toString().trim();
+
+  const map = {
+    burial: "Burial",
+    cremation: "Cremation",
+    both: "Cremation → Burial of ashes",
+    not_sure: "Not yet decided"
+  };
+
+  if (disposition === "other") {
+    return otherText || "Other";
+  }
+
+  return map[disposition] || "";
+}
+
 /* ----------------------------------------------------------
 SHARED RENDERERS
 ---------------------------------------------------------- */
@@ -392,6 +410,15 @@ if (nonEmpty(mood)) { show("svcMoodBlock"); setText("svc_mood", mood); }
 else { hide("svcMoodBlock"); }
 if (nonEmpty(requests)) { show("svcRequestsBlock"); setText("svc_requests", requests); }
 else { hide("svcRequestsBlock"); }
+
+const dispositionPath = formatDispositionPath(snapshot?.services);
+
+if (nonEmpty(dispositionPath)) {
+  show("svcDispositionBlock");
+  setText("svc_disposition", dispositionPath);
+} else {
+  hide("svcDispositionBlock");
+}
 
 const viewing = snapshot?.services?.viewing;
 const memorial = snapshot?.services?.memorial;
