@@ -5,7 +5,7 @@ Schema 4 VMC Migration
 
 (function () {
 
-console.log("SECURE JS LOADED - SCHEMA 4 VMC TEST");
+console.log("SECURE JS LOADED--hydrate disposition test");
 
 const WEBHOOK_URL = "https://hook.us2.make.com/eh74qn7yg2mey49vvu209tjeyhgtiwns";
 console.log("WEBHOOK URL:", WEBHOOK_URL);
