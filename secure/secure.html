@@ -258,8 +258,34 @@ rows="4"
 placeholder="Flowers, overall requests, etc"
 ></textarea>
 </div>
-
 </section>
+
+<section id="SECTION_DISPOSITION" class="form-section">
+  <h4>Disposition</h4>
+
+  <div class="form-block">
+    <label>How would you like the remains handled?</label>
+    <select name="disposition" id="disposition">
+      <option value="">Select disposition</option>
+      <option value="burial">Burial</option>
+      <option value="cremation">Cremation</option>
+      <option value="both">Both — cremation with burial of ashes</option>
+      <option value="not_sure">Not sure</option>
+      <option value="other">Other</option>
+    </select>
+  </div>
+
+  <div class="form-block" id="disposition_other_block">
+    <label>Other disposition notes</label>
+    <input
+      type="text"
+      name="disposition_other"
+      id="disposition_other"
+      placeholder="Describe briefly"
+    >
+  </div>
+</section>
+  
 <section id="SECTION_VIEWING" class="form-section">
   <h4>Viewing</h4>
 
