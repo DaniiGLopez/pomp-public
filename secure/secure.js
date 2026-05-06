@@ -165,7 +165,9 @@ setFieldValue("last_name", person.last_name);
 
 function hydrateServices(services) {
   if (!services) return;
-
+  setFieldValue("disposition", services.disposition);
+  setFieldValue("disposition_other", services.disposition_other);
+  
   setFieldValue("mood_service", services.service_mood);
   setFieldValue("special_requests_service", services.special_requests);
 
@@ -358,6 +360,12 @@ function buildServicesFromForm(snapshot) {
   snapshot.services.celebration = snapshot.services.celebration || {};
   snapshot.services.celebration.production_details =
     snapshot.services.celebration.production_details || {};
+
+  snapshot.services.disposition =
+    document.querySelector('[name="disposition"]')?.value || "";
+
+  snapshot.services.disposition_other =
+    document.querySelector('[name="disposition_other"]')?.value || "";
 
   snapshot.services.service_mood =
     document.querySelector('[name="mood_service"]')?.value || "";
