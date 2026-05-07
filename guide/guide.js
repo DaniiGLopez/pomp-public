@@ -242,42 +242,11 @@ function renderInsurance(insurance) {
   show("secInsurance");
 
   const node = el("insurance_table");
-  node.innerHTML = `
-    <div class="pomp-table-wrap pomp-desktop-only">
-      <table>
-        <thead>
-          <tr>
-            <th>Insured</th>
-            <th>Carrier</th>
-            <th>Policy #</th>
-            <th>Type</th>
-            <th>Face Amount</th>
-            <th>Beneficiaries</th>
-            <th>Riders / Notes</th>
-          </tr>
-        </thead>
-        <tbody></tbody>
-      </table>
-    </div>
-    <div class="pomp-mobile-cards pomp-mobile-only"></div>
-  `;
+  node.innerHTML = `<div class="pomp-mobile-cards"></div>`;
 
-  const tbody = node.querySelector("tbody");
-  const mobileCards = node.querySelector(".pomp-mobile-cards");
+  const cards = node.querySelector(".pomp-mobile-cards");
 
   valid.forEach(p => {
-    const tr = document.createElement("tr");
-    tr.innerHTML = `
-      <td>${escapeHtml(p.insured_name || "")}</td>
-      <td>${escapeHtml(p.carrier || "")}</td>
-      <td>${escapeHtml(p.policy_number || "")}</td>
-      <td>${escapeHtml(p.policy_type || "")}</td>
-      <td>${escapeHtml(p.face_amount || "")}</td>
-      <td>${escapeHtml(p.beneficiaries || "")}</td>
-      <td>${escapeHtml(p.riders || "")}</td>
-    `;
-    tbody.appendChild(tr);
-
     const card = document.createElement("div");
     card.className = "pomp-mobile-card";
     card.innerHTML = `
@@ -289,7 +258,7 @@ function renderInsurance(insurance) {
       ${nonEmpty(p.beneficiaries) ? `<div class="pomp-mobile-row"><span class="pomp-mobile-label">Beneficiaries</span><span class="pomp-mobile-value">${escapeHtml(p.beneficiaries)}</span></div>` : ""}
       ${nonEmpty(p.riders) ? `<div class="pomp-mobile-row"><span class="pomp-mobile-label">Riders / Notes</span><span class="pomp-mobile-value">${escapeHtml(p.riders)}</span></div>` : ""}
     `;
-    mobileCards.appendChild(card);
+    cards.appendChild(card);
   });
 }
 
