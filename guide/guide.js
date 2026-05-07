@@ -57,6 +57,23 @@ function maskSSN(value) {
   return `***-**-${last4}`;
 }
 
+function formatPhoneDisplay(value) {
+  const raw = (value ?? "").toString().trim();
+  if (!raw) return "";
+
+  const digits = raw.replace(/\D/g, "");
+
+  if (digits.length === 10) {
+    return `(${digits.slice(0, 3)}) ${digits.slice(3, 6)}-${digits.slice(6)}`;
+  }
+
+  if (digits.length === 11 && digits.startsWith("1")) {
+    return `(${digits.slice(1, 4)}) ${digits.slice(4, 7)}-${digits.slice(7)}`;
+  }
+
+  return raw;
+}
+
 function formatDispositionPath(services) {
   const disposition = (services?.disposition || "").toString().trim();
   const otherText = (services?.disposition_other || "").toString().trim();
@@ -142,7 +159,7 @@ function renderServiceBlock(targetListId, service, options = {}) {
   }
 
   if (nonEmpty(locationPhone)) {
-    lines.push(`Location Phone: ${locationPhone}`);
+    lines.push(`Location Phone: ${formatPhoneDisplay(locationPhone)}`);
   }
 
   if (nonEmpty(service?.location_other)) {
@@ -238,7 +255,7 @@ function renderContacts(contacts) {
       ${nonEmpty(c.phone) ? `
         <div class="pomp-mobile-row">
           <span class="pomp-mobile-label">Phone</span>
-          <span class="pomp-mobile-value">${escapeHtml(c.phone)}</span>
+          <span class="pomp-mobile-value">${escapeHtml(formatPhoneDisplay(c.phone))}</span>
         </div>
       ` : ""}
 
@@ -400,7 +417,7 @@ setText("coverMeta", meta);
 // Personal
 setText("p_full_name", snapshot?.person?.full_name || "");
 setText("p_email", snapshot?.person?.email || "");
-setText("p_phone", snapshot?.person?.phone || "");
+setText("p_phone", formatPhoneDisplay(snapshot?.person?.phone || ""));
 setText("p_address", formatAddress(snapshot?.person || {}));
 
 // Service Vision
