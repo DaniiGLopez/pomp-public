@@ -201,38 +201,70 @@ SECTION RENDERERS
 
 function renderContacts(contacts) {
   const valid = (Array.isArray(contacts) ? contacts : []).filter(c => anyNonEmpty(c));
-  if (!valid.length) { hide("secContacts"); return; }
+
+  if (!valid.length) {
+    hide("secContacts");
+    return;
+  }
+
   show("secContacts");
 
   const node = el("contacts_table");
-  node.innerHTML = `
-    <div class="pomp-table-scroll">
-      <table class="pomp-data-table">
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Relationship</th>
-            <th>Phone</th>
-            <th>Email</th>
-            <th>Address</th>
-            <th>Notes</th>
-          </tr>
-        </thead>
-        <tbody></tbody>
-      </table>
-    </div>`;
 
-  const tbody = node.querySelector("tbody");
+  node.innerHTML = `<div class="pomp-mobile-cards"></div>`;
+
+  const cards = node.querySelector(".pomp-mobile-cards");
+
   valid.forEach(c => {
-    const tr = document.createElement("tr");
-    tr.innerHTML = `
-      <td>${escapeHtml(c.name || "")}</td>
-      <td>${escapeHtml(c.relationship || "")}</td>
-      <td>${escapeHtml(c.phone || "")}</td>
-      <td>${escapeHtml(c.email || "")}</td>
-      <td>${escapeHtml(c.address || "")}</td>
-      <td>${escapeHtml(c.notes || "")}</td>`;
-    tbody.appendChild(tr);
+    const card = document.createElement("div");
+
+    card.className = "pomp-mobile-card";
+
+    card.innerHTML = `
+      ${nonEmpty(c.name) ? `
+        <div class="pomp-mobile-row">
+          <span class="pomp-mobile-label">Name</span>
+          <span class="pomp-mobile-value">${escapeHtml(c.name)}</span>
+        </div>
+      ` : ""}
+
+      ${nonEmpty(c.relationship) ? `
+        <div class="pomp-mobile-row">
+          <span class="pomp-mobile-label">Relationship</span>
+          <span class="pomp-mobile-value">${escapeHtml(c.relationship)}</span>
+        </div>
+      ` : ""}
+
+      ${nonEmpty(c.phone) ? `
+        <div class="pomp-mobile-row">
+          <span class="pomp-mobile-label">Phone</span>
+          <span class="pomp-mobile-value">${escapeHtml(c.phone)}</span>
+        </div>
+      ` : ""}
+
+      ${nonEmpty(c.email) ? `
+        <div class="pomp-mobile-row">
+          <span class="pomp-mobile-label">Email</span>
+          <span class="pomp-mobile-value">${escapeHtml(c.email)}</span>
+        </div>
+      ` : ""}
+
+      ${nonEmpty(c.address) ? `
+        <div class="pomp-mobile-row">
+          <span class="pomp-mobile-label">Address</span>
+          <span class="pomp-mobile-value">${escapeHtml(c.address)}</span>
+        </div>
+      ` : ""}
+
+      ${nonEmpty(c.notes) ? `
+        <div class="pomp-mobile-row">
+          <span class="pomp-mobile-label">Notes</span>
+          <span class="pomp-mobile-value">${escapeHtml(c.notes)}</span>
+        </div>
+      ` : ""}
+    `;
+
+    cards.appendChild(card);
   });
 }
 
