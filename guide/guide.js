@@ -137,6 +137,21 @@ function formatLocationType(value) {
   return map[value] || value || "";
 }
 
+function firstNonEmpty(...values) {
+  for (const value of values) {
+    if (nonEmpty(value)) return value;
+  }
+  return "";
+}
+
+function formatFlowPlace(service) {
+  const name = firstNonEmpty(service?.location_name, formatLocationType(service?.location_type || service?.location_place));
+  const address = firstNonEmpty(service?.location_address);
+
+  if (nonEmpty(name) && nonEmpty(address)) return `${name}<br>${address}`;
+  return name || address || "";
+}
+  
 function renderServiceBlock(targetListId, service, options = {}) {
   const lines = [];
   const productionLines = [];
@@ -215,6 +230,92 @@ function renderServiceBlock(targetListId, service, options = {}) {
 /* ----------------------------------------------------------
 SECTION RENDERERS
 ---------------------------------------------------------- */
+function renderCeremonyFlow(snapshot) {
+  const steps = [];
+  const services = snapshot?.services || {};
+  const cemetery = snapshot?.cemetery || {};
+
+  const viewingPlace = formatFlowPlace(services.viewing);
+  if (nonEmpty(viewingPlace)) {
+    steps.push({
+      title: "Viewing",
+      detail: viewingPlace
+    });
+  }
+
+  const memorialPlace = formatFlowPlace(services.memorial);
+  if (nonEmpty(memorialPlace)) {
+    steps.push({
+      title: "Memorial",
+      detail: memorialPlace
+    });
+  }
+
+  const celebrationPlace = formatFlowPlace(services.celebration);
+  if (nonEmpty(celebrationPlace)) {
+    steps.push({
+      title: "Celebration of Life",
+      detail: celebrationPlace
+    });
+  }
+
+  const dispositionPath = formatDispositionPath(services);
+  if (nonEmpty(dispositionPath)) {
+    steps.push({
+      title: "Disposition",
+      detail: dispositionPath
+    });
+  }
+
+  const finalRestingPlace = firstNonEmpty(
+    cemetery.cemetery_name,
+    cemetery.scattering_location,
+    cemetery.ashes_instructions
+  );
+
+  const finalRestingDetail = [
+    finalRestingPlace,
+    cemetery.cemetery_location
+  ].filter(nonEmpty).join("<br>");
+
+  if (nonEmpty(finalRestingDetail)) {
+    steps.push({
+      title: "Final Resting Place",
+      detail: finalRestingDetail
+    });
+  }
+
+  const block = el("svcFlowBlock");
+  const node = el("svc_flow");
+
+  if (!block || !node) return;
+
+  node.innerHTML = "";
+
+  if (!steps.length) {
+    hide("svcFlowBlock");
+    return;
+  }
+
+  steps.forEach((step, index) => {
+    if (index > 0) {
+      const arrow = document.createElement("div");
+      arrow.className = "pomp-flow-arrow";
+      arrow.textContent = "↓";
+      node.appendChild(arrow);
+    }
+
+    const div = document.createElement("div");
+    div.className = "pomp-flow-step";
+    div.innerHTML = `
+      <div class="pomp-flow-title">${escapeHtml(step.title)}</div>
+      <div class="pomp-flow-detail">${step.detail}</div>
+    `;
+    node.appendChild(div);
+  });
+
+  show("svcFlowBlock");
+}
 
 function renderContacts(contacts) {
   const valid = (Array.isArray(contacts) ? contacts : []).filter(c => anyNonEmpty(c));
@@ -437,6 +538,8 @@ if (nonEmpty(dispositionPath)) {
 } else {
   hide("svcDispositionBlock");
 }
+
+renderCeremonyFlow(snapshot);
 
 const viewing = snapshot?.services?.viewing;
 const memorial = snapshot?.services?.memorial;
