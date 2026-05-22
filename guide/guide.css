@@ -241,6 +241,47 @@ line-height: 1.5;
 SERVICE VISION / VMC
 ---------------------------------------------------------- */
 
+.pomp-flow {
+  margin-bottom: 18px;
+  padding: 16px;
+  border: 1px solid var(--pomp-border);
+  border-left: 4px solid var(--pomp-olive);
+  border-radius: var(--radius-md);
+  background: #fff;
+}
+
+.pomp-flow-steps {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.pomp-flow-step {
+  padding: 10px 12px;
+  border-radius: var(--radius-sm);
+  background: var(--pomp-bg);
+  border: 1px solid var(--pomp-border);
+}
+
+.pomp-flow-title {
+  font-family: var(--font-heading);
+  color: var(--pomp-forest);
+  font-size: 0.95rem;
+  margin-bottom: 2px;
+}
+
+.pomp-flow-detail {
+  font-size: 0.95rem;
+  line-height: 1.4;
+}
+
+.pomp-flow-arrow {
+  text-align: center;
+  color: var(--pomp-muted);
+  font-size: 1.1rem;
+}
+
 .pomp-disposition-path {
   font-size: 1.05rem;
   font-weight: 600;
