@@ -259,14 +259,6 @@ function renderCeremonyFlow(snapshot) {
     });
   }
 
-  const dispositionPath = formatDispositionPath(services);
-  if (nonEmpty(dispositionPath)) {
-    steps.push({
-      title: "Disposition",
-      detail: dispositionPath
-    });
-  }
-
   const finalRestingPlace = firstNonEmpty(
     cemetery.cemetery_name,
     cemetery.scattering_location,
