@@ -409,97 +409,168 @@ margin: 0.7in 0.75in;
 
 @media print {
 
-.no-print { display: none !important; }
+  .no-print { display: none !important; }
 
-html, body { width: 100%; }
+  html, body { width: 100%; }
 
-.pomp-guide {
-max-width: 100%;
-margin: 0;
-padding: 0;
-background: #fff;
-box-shadow: none;
-}
+  .pomp-guide {
+    max-width: 100%;
+    margin: 0;
+    padding: 0;
+    background: #fff;
+    box-shadow: none;
+  }
 
-.pomp-cover {
-box-shadow: none;
-border: none;
-border-bottom: 2px solid var(--pomp-border);
-border-radius: 0;
-padding: 0 0 20px;
-margin-bottom: 20px;
-}
+  .pomp-cover {
+    box-shadow: none;
+    border: none;
+    border-bottom: 1px solid var(--pomp-border);
+    border-radius: 0;
+    padding: 0 0 12px;
+    margin-bottom: 10px;
+  }
 
-.pomp-section {
-  box-shadow: none;
-  border: none;
-  border-bottom: 1px solid var(--pomp-border);
-  border-radius: 0;
-  padding: 16px 0;
-  margin-bottom: 0;
-  break-inside: avoid;
-}  
+  .pomp-cover h1 {
+    font-size: 1.65rem;
+    margin-bottom: 4px;
+  }
 
-h2, h3 {
-break-after: avoid;
-}
+  .pomp-brand {
+    margin-bottom: 6px;
+  }
 
-.pomp-item {
-break-inside: avoid;
-background: #fff;
-border-color: #ccc;
-}
+  .pomp-section {
+    box-shadow: none;
+    border: none;
+    border-bottom: 1px solid var(--pomp-border);
+    border-radius: 0;
+    padding: 10px 0;
+    margin-bottom: 0;
+    break-inside: auto;
+    page-break-inside: auto;
+  }
 
-table {
-break-inside: auto;
-}
+  .pomp-section h2 {
+    font-size: 1.05rem;
+    margin-bottom: 8px;
+    padding-bottom: 6px;
+  }
 
-thead {
-display: table-header-group;
-}
+  .pomp-section h3 {
+    font-size: 0.95rem;
+    margin-bottom: 6px;
+  }
 
-tr {
-break-inside: avoid;
-}
+  h2, h3 {
+    break-after: avoid;
+  }
 
-th {
-background: #4C5C53 !important;
-color: #fff !important;
--webkit-print-color-adjust: exact;
-print-color-adjust: exact;
-}
+  .pomp-callout,
+  .pomp-flow,
+  #blockViewing,
+  #blockMemorial,
+  #blockCelebration,
+  .pomp-mobile-card,
+  .pomp-item {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
 
-tr:nth-child(even) td {
-background: #f5f5f5 !important;
--webkit-print-color-adjust: exact;
-print-color-adjust: exact;
-}
+  .pomp-callout,
+  .pomp-flow {
+    padding: 9px 11px;
+    margin-bottom: 8px;
+  }
 
-a {
-color: inherit;
-text-decoration: none;
-}
+  .pomp-flow-step,
+  .pomp-item,
+  .pomp-mobile-card {
+    padding: 7px 9px;
+  }
 
-.pomp-3col {
-  display: block !important;
-}
+  .pomp-flow-steps,
+  .pomp-list,
+  .pomp-mobile-cards {
+    gap: 6px;
+  }
 
-#blockViewing,
-#blockMemorial,
-#blockCelebration {
-  width: 100%;
-  margin-bottom: 16px;
-  break-inside: avoid;
-}
+  .pomp-flow-arrow {
+    font-size: 0.9rem;
+    line-height: 1;
+  }
 
-.pomp-label,
-.pomp-value {
-  word-break: keep-all;
-}
+  .pomp-grid {
+    gap: 8px 18px;
+  }
+
+  .pomp-label,
+  .pomp-mobile-label {
+    font-size: 0.7rem;
+    margin-bottom: 1px;
+  }
+
+  .pomp-value,
+  .pomp-mobile-value,
+  .pomp-item,
+  .pomp-flow-detail {
+    font-size: 0.9rem;
+    line-height: 1.32;
+  }
+
+  table {
+    break-inside: auto;
+  }
+
+  thead {
+    display: table-header-group;
+  }
+
+  tr {
+    break-inside: avoid;
+  }
+
+  th {
+    background: #4C5C53 !important;
+    color: #fff !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  tr:nth-child(even) td {
+    background: #f5f5f5 !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .pomp-3col {
+    display: block !important;
+  }
+
+  #blockViewing,
+  #blockMemorial,
+  #blockCelebration {
+    width: 100%;
+    margin-bottom: 8px;
+    padding: 10px;
+  }
+
+  .pomp-subsection + .pomp-subsection {
+    margin-top: 8px;
+  }
+
+  .pomp-label,
+  .pomp-value {
+    word-break: keep-all;
+  }
 }
 
 /* ----------------------------------------------------------
-RENDER INSURANCE MOBILE VIEW CARD PRIORITIZATION
+CARD LAYOUTS
 ---------------------------------------------------------- */
 
 .pomp-desktop-only {
