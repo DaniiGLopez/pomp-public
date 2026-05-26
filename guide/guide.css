@@ -567,17 +567,24 @@ margin: 0.7in 0.75in;
   .pomp-value {
     word-break: keep-all;
   }
+  
 /* Print-only: compact card grids */
+  
 #secContacts .pomp-mobile-cards,
 #secInsurance .pomp-mobile-cards {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   gap: 8px;
+  width: 100%;
 }
 
 #secContacts .pomp-mobile-card,
 #secInsurance .pomp-mobile-card {
   padding: 7px 9px;
+  min-width: 0;
+  max-width: 100%;
+  overflow-wrap: anywhere;
+  word-break: normal;
   break-inside: avoid;
   page-break-inside: avoid;
 }
