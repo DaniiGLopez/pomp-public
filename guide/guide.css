@@ -567,6 +567,50 @@ margin: 0.7in 0.75in;
   .pomp-value {
     word-break: keep-all;
   }
+/* Print-only: compact card grids */
+#secContacts .pomp-mobile-cards,
+#secInsurance .pomp-mobile-cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+#secContacts .pomp-mobile-card,
+#secInsurance .pomp-mobile-card {
+  padding: 7px 9px;
+  break-inside: avoid;
+  page-break-inside: avoid;
+}
+
+.pomp-mobile-row + .pomp-mobile-row {
+  margin-top: 4px;
+}
+
+/* Print-only: reduce orphan final pages */
+.pomp-footer {
+  margin-top: 6px;
+  padding-top: 5px;
+  font-size: 0.78rem;
+}
+
+#secFunding {
+  padding-bottom: 6px;
+}
+
+/* Print-only: tighten Service Vision */
+  
+.pomp-flow-step {
+  padding: 6px 8px;
+}
+
+.pomp-flow-arrow {
+  margin: -2px 0;
+}
+
+.pomp-callout {
+  margin-bottom: 7px;
+}
+  
 }
 
 /* ----------------------------------------------------------
